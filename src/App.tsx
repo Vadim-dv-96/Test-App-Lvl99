@@ -1,24 +1,22 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import style from './App.module.scss';
+import { AddItemForm } from './components/AddNameForm/AddNameForm';
+import { NameUser } from './components/NameUser/NameUser';
+import { useAppDispatch } from './hooks/hooks';
+import { setUserName } from './state/nameForm-reducer';
 
 function App() {
+  const dispatch = useAppDispatch();
+
+  const addUsername = (userName: string) => {
+    dispatch(setUserName({ userName }));
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className={style.App}>
+      <div className={style.container}>
+        <AddItemForm addUsername={addUsername} />
+        <NameUser />
+      </div>
     </div>
   );
 }
